@@ -1,4 +1,4 @@
-# A primer to Web Scraping with R
+# Web Scraping with R, Extended Edition
 
 ## General information
 
@@ -8,11 +8,11 @@ The web is full of data that are of great interest to scientists and businesses 
 
 **Event**
 
-Joint Statistical Meetings 2016, Continuing Education Course, Chicago
+Social Science Data Lab, MZES Mannheim
 
-**Venue**
+**Date and Venue**
 
-McCormick Place Convention Center, West Building, W470a
+Friday, October 14, MZES A Building, Room A-231
 
 **Instructor** 
 
@@ -77,7 +77,7 @@ locations <- str_extract(gsub(intToUtf8(0x2013),"-",breweries),"[[:digit:]].+?-"
 | Area | URL | Short description |
 |---------------------------|-------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | Web technologies, general | http://www.w3.org/ | Base of the World Wide Web Consortium (W3C), also provides access to standards and drafts of web technologies |
-|  | http://w3schools.com | Great tutorial playground to lern web technologies interactively |
+|  | http://w3schools.com | Great tutorial playground to learn web technologies interactively |
 |  | https://w3techs.com/technologies | Overview of all kinds of web technologies |
 | XML and XPath | http://selectorgadget.com/ | Probably the most useful tool for generating CSS selectors and XPath expressions with a simple point-and-click approach |
 |  | http://www.xmlvalidation.com/ | Online XML validator |
