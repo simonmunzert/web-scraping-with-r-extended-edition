@@ -26,10 +26,10 @@ This course assumes prior experience using R. Please bring a laptop with the lat
 
 |  | Time | Topic |
 |--------|-------------------------|---------------------------------------------------------|
-| Slot 1 | 8.30 a.m. - 10.15 a.m. | Introduction, setup, and overview |
+| Slot 1 | 09.00 a.m. - 10.15 a.m. | Introduction, setup, and overview |
 | Slot 2 | 10.30 a.m. - 12.30 a.m. | Scraping static webpages with rvest |
-| Slot 3 | 2.00 p.m. - 3.15 p.m. | Scraping dynamic webpages with RSelenium; good practice |
-| Slot 4 | 3.30 p.m. - 5.00 p.m. | Tapping APIs |
+| Slot 3 | 02.00 p.m. - 03.15 p.m. | Scraping dynamic webpages with RSelenium; good practice |
+| Slot 4 | 03.30 p.m. - 05.00 p.m. | Tapping APIs |
 
 
 ## Accompanying book
