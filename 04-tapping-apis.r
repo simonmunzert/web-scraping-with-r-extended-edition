@@ -143,7 +143,7 @@ writeLines(credentials, fname)
 # negotiate credentials
 api_key <- Sys.getenv("twitter_api_key")
 api_secret <- Sys.getenv("twitter_api_secret")
-setup_twitter_oauth(api_key,api_secret)
+setup_twitter_oauth(api_key,api_secret) # selecting "1: Yes" usually works
 
 # search tweets on twitter
 tweets <- searchTwitter(searchString = "Trump", n=25)

@@ -50,16 +50,21 @@ content <- read_html(url)
 # set up connection via RSelenium package
 # documentation: http://cran.r-project.org/web/packages/RSelenium/RSelenium.pdf
 
-
 # retrieve Selenium Server binary if necessary
-checkForServer()
-
-# on a Mac: launch downloaded Selenium .jar file externally via Jar Launcher
+checkForServer() ## deprecated; but gives advice on how to source/start a server
 
 # start server
-startServer() 
+startServer()  ## deprecated
+
+# my solution on a Mac: 
+  # install latest Java Development Kit (JDK
+  # install selenium standalone server
+  # open Terminal, navigate to folder where standalone server file is deposited
+  # run the following line in Terminal: java -jar selenium-server-standalone-2.53.1.jar
+
 
 # connect to server
+remDr <- remoteDriver$new()
 remDr <- remoteDriver(remoteServerAddr = "localhost", port = 4444, browserName = "firefox") 
 
 # open connection; Firefox window should pop up

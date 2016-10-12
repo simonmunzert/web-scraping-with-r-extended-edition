@@ -38,7 +38,7 @@ str_detect(affiliations, "tatisti|athemati") %>% table
 url <- "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_the_world"
 url_parsed <- read_html(url)
 tables <- html_table(url_parsed, fill = TRUE)
-buildings <- tables[[7]]
+buildings <- tables[[6]]
 table(buildings$`Country/region`) %>% sort
 table(buildings$City) %>% sort
 
@@ -111,9 +111,9 @@ p
 library(pageviews)
 ls("package:pageviews")
 
-trump_views <- article_pageviews(project = "en.wikipedia", article = "Donald Trump", user_type = "user", start = "2016010100", end = "20160729")
+trump_views <- article_pageviews(project = "en.wikipedia", article = "Donald Trump", user_type = "user", start = "2016010100", end = "20161011")
 head(trump_views)
-clinton_views <- article_pageviews(project = "en.wikipedia", article = "Hillary Clinton", user_type = "user", start = "2016010100", end = "20160729")
+clinton_views <- article_pageviews(project = "en.wikipedia", article = "Hillary Clinton", user_type = "user", start = "2016010100", end = "20161011")
 
 plot(ymd_h(trump_views$timestamp), trump_views$views, col = "red", type = "l")
 lines(ymd_h(clinton_views$timestamp), clinton_views$views, col = "blue")

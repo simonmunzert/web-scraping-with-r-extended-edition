@@ -9,53 +9,50 @@ source("00-course-setup.r")
 wd <- getwd()
 
 
-## case study 1: map breweries in the Chicago area -------
+## case study 1: map breweries in Germany -------
 
 ##  goal
-# get list of breweries in the Chicago area
+# get list of breweries in Germany
 # import list in R
 # geolocate breweries
 # put them on a map
 
-
 # set temporary working directory
-tempwd <- ("data/breweriesChicago")
+tempwd <- ("data/breweriesGermany")
 dir.create(tempwd)
 setwd(tempwd)
 
 ## step 1: fetch list of cities with breweries
-url <- "https://www.google.de/?#q=list+breweries+chicago"
+url <- "http://www.biermap24.de/brauereiliste.php"
 browseURL(url)
-url <- "http://thehopreview.com/blog/chicago-brewery-list"
-content <- read_html(url, encoding = "utf8")
-anchors <- html_nodes(content, css = "#block-yui_3_17_2_8_1438187725105_11398 p")
-breweries <- html_text(anchors)
-length(breweries)
-head(breweries)
-breweries <- breweries[-1]
+content <- read_html(url)
+anchors <- html_nodes(content, xpath = "//tr/td[2]")
+cities <- html_text(anchors)
+cities
+cities <- str_trim(cities)
+cities <- cities[str_detect(cities, "^[[:upper:]]+.")]
+length(cities)
+length(unique(cities))
+sort(table(cities))
 
 
-## step 2: geocode breweries
-# geocoding takes a while -> store results in local cache file
+## step 2: geocode cities
+
+# geocoding takes a while -> save results in local cache file
 # 2500 requests allowed per day
-
-locations <- str_extract(breweries, "[[:digit:]].+?–")
-locations <- str_replace(locations, "–", ", Chicago, IL")
-locations <- locations[!is.na(locations)]
-
-if (!file.exists("breweries_geo.RData")){
-  pos <- geocode(locations, source = "google")
+if ( !file.exists("breweries_geo.RData")){
+  pos <- geocode(cities)
   geocodeQueryCheck()
   save(pos, file="breweries_geo.RData")
 } else {
   load("breweries_geo.RData")
 }
 head(pos)
+View(pos)
 
-
-## step 3: plot breweries of Chicago
-brewery_map <- get_map(location=c(lon=mean(pos$lon), lat=mean(pos$lat)), zoom="auto", maptype="hybrid")
-p <- ggmap(brewery_map) + geom_point(data=pos, aes(x=lon, y=lat), col="red", size=3)
+## step 3: plot breweries of Germany
+brewery_map <- get_map(location=c(lon = mean(c(min(pos$lon), max(pos$lon))), lat = mean(c(min(pos$lat), max(pos$lat)))), zoom=6, maptype="hybrid")
+p <- ggmap(brewery_map) + geom_point(data=pos, aes(x=lon, y=lat), col="red", size=1)
 p
 
 ## return to base working drive
