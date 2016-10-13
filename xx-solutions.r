@@ -65,18 +65,16 @@ browseURL("http://www.starbucks.com/store-locator/search/location/chicago")
 url <- "http://www.starbucks.com/store-locator/search/location/chicago"
 
 # navigate to page
-checkForServer()
-startServer() 
 remDr <- remoteDriver(remoteServerAddr = "localhost", port = 4444, browserName = "firefox") 
 remDr$open() 
 remDr$navigate(url) 
 
 # actions on page
-css <- 'span.icon:nth-child(2)'
+css <- '.filterButton___TxeLm'
 click_elem <- remDr$findElement(using = 'css', value = css)
 open_elem <- click_elem$clickElement() # click on button
 
-css <- '#find_wf'
+css <- 'li.item___3yAHj:nth-child(6) > button:nth-child(1)'
 click_elem <- remDr$findElement(using = 'css', value = css)
 open_elem <- click_elem$clickElement() # click on button
 
@@ -89,8 +87,8 @@ remDr$closeServer()
 
 # import data
 content <- read_html("starbucks-chicago.html", encoding = "utf8") 
-store_names <- html_nodes(content, ".store-name") %>% html_text()
-store_addresses <- html_nodes(content, ".address li:nth-child(1)") %>% html_text()
+store_names <- html_nodes(content, ".truncate") %>% html_text()
+store_addresses <- html_nodes(content, ".addressLine___2afjd:nth-child(1)") %>% html_text()
 
 # geocode and map stores
 locations <- paste0(store_addresses, ", Chicago, IL")

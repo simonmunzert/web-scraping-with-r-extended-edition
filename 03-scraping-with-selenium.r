@@ -34,11 +34,13 @@ browseURL("https://www.buzzfeed.com/?country=us")
 browseURL("https://www.java.com/en/download/")
   
 # install current version of Firefox browser
-browseURL("https://www.mozilla.org/en-US/firefox/new/")
+browseURL("https://www.mozilla.org/en-US/firefox/new/") # might not always work, probably go with version 48 instead?
 
 # install dev version of RSelenium
 devtools::install_github("ropensci/RSelenium")
 
+# note: on a Windows or Linux machine, using Docker might be useful; see
+vignette("RSelenium-docker", package = "RSelenium") 
 
 
 ## example --------------------------
@@ -57,14 +59,20 @@ checkForServer() ## deprecated; but gives advice on how to source/start a server
 startServer()  ## deprecated
 
 # my solution on a Mac: 
-  # install latest Java Development Kit (JDK
-  # install selenium standalone server
+  # install latest Java Development Kit (JDK)
+  # install selenium standalone server, current beta
   # open Terminal, navigate to folder where standalone server file is deposited
-  # run the following line in Terminal: java -jar selenium-server-standalone-2.53.1.jar
+  # check whether processes run on port 4444 with lsof -i:4444; potentially kill them using PID
+  # run the following line in Terminal: java -jar selenium-server-standalone-3.0.0-beta4.jar
+  # open Firefox developer tools before sending stuff!
 
+
+
+
+# assume gecko driver is not in our path (assume windows and we downloaded to docs folder)
+# if the driver is in your PATH the javaargs call is not needed
 
 # connect to server
-remDr <- remoteDriver$new()
 remDr <- remoteDriver(remoteServerAddr = "localhost", port = 4444, browserName = "firefox") 
 
 # open connection; Firefox window should pop up
@@ -91,6 +99,7 @@ css <- 'div.form-container:nth-child(6) > select:nth-child(2)'
 fromDrop <- remDr$findElement(using = 'css', value = css) 
 clickFrom <- fromDrop$clickElement() # click on drop-down menu
 writeFrom <- fromDrop$sendKeysToElement(list("2000")) # enter start year
+
 
 css <- 'div.form-container:nth-child(6) > select:nth-child(3)'
 toDrop <- remDr$findElement(using = 'css', value = css) 
@@ -132,9 +141,4 @@ head(tab)
 browseURL("http://www.starbucks.com/store-locator/search/location/chicago")
 
 
-
-
-## a little refresher: R and 2048 ---------------------------
-source("rselenium-2048.r") # by Mark T. Patterson
-grand.play()
 
