@@ -25,7 +25,11 @@ browseURL("https://www.jstatsoft.org/about/editorialTeam")
 url <- "https://www.jstatsoft.org/about/editorialTeam"
 url_parsed <- read_html(url)
 names <- html_nodes(url_parsed, css = ".member a") %>% html_text()
+names <- html_nodes(url_parsed, css = ".member") %>% html_text()
 names <- html_nodes(url_parsed, "#group a") %>% html_text()
+
+xpath <- '//div[@id="content"]//li/a'
+html_nodes(url_parsed, xpath = xpath) %>% html_text()
 
 affiliations <- html_nodes(url_parsed, ".member li") %>% html_text()
 str_detect(affiliations, "tatisti|athemati") %>% table
@@ -109,12 +113,13 @@ p
 library(pageviews)
 ls("package:pageviews")
 
-trump_views <- article_pageviews(project = "en.wikipedia", article = "Donald Trump", user_type = "user", start = "2016010100", end = "20161011")
+trump_views <- article_pageviews(project = "en.wikipedia", article = "Donald Trump", user_type = "user", start = "2016010100", end = "20161110")
 head(trump_views)
-clinton_views <- article_pageviews(project = "en.wikipedia", article = "Hillary Clinton", user_type = "user", start = "2016010100", end = "20161011")
+clinton_views <- article_pageviews(project = "en.wikipedia", article = "Hillary Clinton", user_type = "user", start = "2016010100", end = "20161110")
 
 plot(ymd_h(trump_views$timestamp), trump_views$views, col = "red", type = "l")
 lines(ymd_h(clinton_views$timestamp), clinton_views$views, col = "blue")
+
 
 
 
@@ -126,7 +131,7 @@ browseURL("http://openweathermap.org/api")
 
 apikey <- "&appid=42c7829f663f87eb05d2f12ab11f2b5d"
 endpoint <- "http://api.openweathermap.org/data/2.5/find?"
-city <- "Chicago,IL"
+city <- "Mannheim,Germany"
 metric <- "&units=metric"
 url <- paste0(endpoint, "q=", city, metric, apikey)
 weather_res <- GET(url)

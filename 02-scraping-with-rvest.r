@@ -1,4 +1,4 @@
-### -----------------------------
+ ### -----------------------------
 ### simon munzert
 ### scraping with rvest
 ### -----------------------------
@@ -85,6 +85,9 @@ browseURL("https://www.jstatsoft.org/about/editorialTeam")
   # a) which CSS identifiers can be used to describe all names of the editorial team?
   # b) write a corresponding CSS selector that targets them!
 
+.member a
+div.member a
+#group a
 
 ## a quick primer to XPath ------------------
 
@@ -129,6 +132,10 @@ headings <- str_replace_all(headings, "\\n", "") %>% str_trim()
 #######################
 
 # 1. revisit the jstatsoft.org website from above and use rvest to extract the names!
+
+url <- "https://www.jstatsoft.org/about/editorialTeam"
+
+
 # 2. bonus: try and extract the full lines including the affiliation, and count how many of the editors are at a statistics or mathematics department or institution!
 
 
@@ -177,6 +184,11 @@ browseURL("http://selectorgadget.com/")
 ## SelectorGadget is magic. Proof:
 browseURL("https://www.buzzfeed.com/?country=us")
 
+css <- '.sm-text-3'
+css <- ".schlagzeilen-headline"
+url <- "http://spiegel.de/schlagzeilen"
+url_parsed <- read_html(url)
+html_nodes(url_parsed, css = css) %>% html_text
 
 #######################
 ### IT'S YOUR SHOT! ###
@@ -219,7 +231,7 @@ folder <- "html_articles/"
 dir.create(folder)
 for (i in 1:length(urls_list)) {
   if (!file.exists(paste0(folder, names[i]))) {
-    download.file(urls_list[i], destfile = paste0(folder, "/", names[i]))
+    download.file(urls_list[i], destfile = paste0(folder, names[i]))
     Sys.sleep(runif(1, 0, 1))
   }
 }
