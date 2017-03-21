@@ -99,6 +99,7 @@ locations <- str_extract(gsub(intToUtf8(0x2013),"-",breweries),"[[:digit:]].+?-"
 |  | http://regexone.com/ | Online regex tutorial |
 |  | http://regex101.com | Regex testing environment |
 |  | http://www.regexplanet.com/ | Another regex testing environment |
+|  | http://regex.inginf.units.it/ | App to learn optimal regular expression based on training data |
 |  | http://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags/1732454#1732454 | The truth about HTML parsing with regular expressions |
 |  | https://www.youtube.com/watch?v=Cv2DpwSCgRw | Yes, there's a regex song |
 | Selenium | http://docs.seleniumhq.org | Selenium documentation |
